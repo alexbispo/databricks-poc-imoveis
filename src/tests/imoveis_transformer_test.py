@@ -1,4 +1,4 @@
-from src.etl.bronze.imoveis import transformation as tf
+from etl.bronze.imoveis import transformation as tf
 from pyspark.sql import SparkSession
 from pyspark.sql import DataFrame
 
@@ -51,11 +51,11 @@ def test_select_columns():
         .master("local[*]") \
         .appName("POC Unit Tests") \
         .getOrCreate()
-    
+
 
     df = spark.read.json(spark.sparkContext.parallelize([jsonString]))
 
     df = tf.select_columns(df)
-    
+
     assert type(df) == DataFrame
     #spark.stop()
